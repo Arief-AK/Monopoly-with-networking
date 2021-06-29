@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerConcurrent", "ServerConcurrent\ServerConcurrent.csproj", "{0266883F-F783-4D55-9A78-0F7D1A465344}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIMonopoly", "UIMonopoly\UIMonopoly.csproj", "{217142A6-1E9D-488F-BE9B-CFE50E888448}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{0266883F-F783-4D55-9A78-0F7D1A465344}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0266883F-F783-4D55-9A78-0F7D1A465344}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0266883F-F783-4D55-9A78-0F7D1A465344}.Release|Any CPU.Build.0 = Release|Any CPU
+		{217142A6-1E9D-488F-BE9B-CFE50E888448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{217142A6-1E9D-488F-BE9B-CFE50E888448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{217142A6-1E9D-488F-BE9B-CFE50E888448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{217142A6-1E9D-488F-BE9B-CFE50E888448}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
