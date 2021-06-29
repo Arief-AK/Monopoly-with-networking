@@ -20,9 +20,39 @@ namespace UIMonopoly
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void RegistrationAlmostDoneButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            RegistrationPanel.Visibility = Visibility.Collapsed;
+            if (IsHostRadioB.IsChecked == true)
+            {
+                RegistrationHostPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ClientPanel.Visibility = Visibility.Visible;
+            }
+        }
+        
+        private void CreateGameButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            RegistrationHostPanel.Visibility = Visibility.Hidden;
+            HostPanel.Visibility = Visibility.Visible;
+        }
+
+        private void YesButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("You pressed 'Yes'");
+        }
+        
+        private void NoButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("You pressed 'No'");
         }
     }
 }

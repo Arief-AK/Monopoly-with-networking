@@ -5,8 +5,98 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UIMonopoly"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="Monopoly Game" Height="450" Width="800">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Border CornerRadius="18" BorderThickness="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="LightCyan" Offset="0.0" />
+                    <GradientStop Color="LightBlue" Offset="0.5" />
+                    <GradientStop Color="DarkTurquoise" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="RegistrationPanel">
+                <StackPanel Margin="10">
+                    <Label FontSize="18" FontWeight="Bold" HorizontalAlignment="Center">Welcome to the Monopoly game!</Label>
+                    <Label FontSize="16" HorizontalAlignment="Left">Who are you?</Label>
+                    <RadioButton FontSize="14" x:Name="IsHostRadioB">Host player</RadioButton>
+                    <RadioButton FontSize="14" IsChecked="True" x:Name="IsClientRadioB">Client player</RadioButton>
+                </StackPanel>
+                <Grid>
+                    <Label Content="Enter your name" FontSize="16" Height="28" Padding="5, 0, 0, 3" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <TextBox Height="23" Width="350" Margin="5,26,5,0" Name="UserNameTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                </Grid>
+                <Image HorizontalAlignment="Center" Source="/Images/MonopolyGuy.png"></Image>
+                <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RegistrationDoneButton" Click="RegistrationAlmostDoneButton_OnClick">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
+                                <TextBlock Text="Let's go !" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </Border>
+        <Border CornerRadius="18" BorderThickness="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="LightCyan" Offset="0.0" />
+                    <GradientStop Color="LightBlue" Offset="0.5" />
+                    <GradientStop Color="DarkTurquoise" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel x:Name="RegistrationHostPanel" Visibility="Collapsed">
+                <Grid>
+                    <Label Content="How many players will there be?" FontSize="16" Height="28" Padding="5, 0, 0, 3" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <TextBox Height="23" Width="350" Margin="5,26,5,0" Name="PlayersQuantityTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                </Grid>
+                <Grid>
+                    <Label Content="Enter the key" FontSize="16" Height="28" Padding="5, 0, 0, 3" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <TextBox Height="23" Width="350" Margin="5,26,5,0" Name="KeyTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                </Grid>
+                <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="CreateGameButton" Click="CreateGameButton_OnClick">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
+                                <TextBlock Text="Create the game" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </Border>
+        <Canvas x:Name="HostPanel" Visibility="Collapsed">
+            <Image HorizontalAlignment="Center" Source="/Images/LargeBoard.jpg"></Image>
+        </Canvas>
+        <Border CornerRadius="18" BorderThickness="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="LightCyan" Offset="0.0" />
+                    <GradientStop Color="LightBlue" Offset="0.5" />
+                    <GradientStop Color="DarkTurquoise" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel x:Name="ClientPanel" Visibility="Collapsed">
+                <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="YesButton" Click="YesButton_OnClick">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
+                                <TextBlock Text="Yes" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="NoButton" Click="NoButton_OnClick">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
+                                <TextBlock Text="No" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </Border>
+    </StackPanel>
 </Window>
