@@ -5,98 +5,214 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UIMonopoly"
         mc:Ignorable="d"
-        Title="Monopoly Game" Height="450" Width="800">
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Border CornerRadius="18" BorderThickness="2">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                    <GradientStop Color="LightCyan" Offset="0.0" />
-                    <GradientStop Color="LightBlue" Offset="0.5" />
-                    <GradientStop Color="DarkTurquoise" Offset="1.0" />
-                </LinearGradientBrush>
-            </Border.Background>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="RegistrationPanel">
+        Title="Monopoly Game" Height="800" Width="800">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="RegistrationPanel">
+            <Border CornerRadius="18" BorderThickness="2">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="LightCyan" Offset="0.0" />
+                        <GradientStop Color="LightBlue" Offset="0.5" />
+                        <GradientStop Color="DarkTurquoise" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
                 <StackPanel Margin="10">
                     <Label FontSize="18" FontWeight="Bold" HorizontalAlignment="Center">Welcome to the Monopoly game!</Label>
                     <Label FontSize="16" HorizontalAlignment="Left">Who are you?</Label>
                     <RadioButton FontSize="14" x:Name="IsHostRadioB">Host player</RadioButton>
                     <RadioButton FontSize="14" IsChecked="True" x:Name="IsClientRadioB">Client player</RadioButton>
+                    <StackPanel>
+                        <Label Content="Enter your name" FontSize="16" Height="28" Padding="5, 0, 0, 3" Margin="5,10,5,0" />
+                        <TextBox Height="23" Width="350" Margin="5,0,5,0" Name="UserNameTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                    </StackPanel>
+                    <Image HorizontalAlignment="Center" Source="/Images/MonopolyGuy.png" Width="70"></Image>
+                    <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RegistrationDoneButton" Click="RegistrationAlmostDoneButton_OnClick">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
+                                    <TextBlock Text="Let's go !" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </StackPanel>
-                <Grid>
-                    <Label Content="Enter your name" FontSize="16" Height="28" Padding="5, 0, 0, 3" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                    <TextBox Height="23" Width="350" Margin="5,26,5,0" Name="UserNameTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                </Grid>
-                <Image HorizontalAlignment="Center" Source="/Images/MonopolyGuy.png"></Image>
-                <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RegistrationDoneButton" Click="RegistrationAlmostDoneButton_OnClick">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
-                                <TextBlock Text="Let's go !" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+            </Border>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="HostRegistrationPanel" Visibility="Collapsed">
+            <Border CornerRadius="18" BorderThickness="2">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="LightCyan" Offset="0.0" />
+                        <GradientStop Color="LightBlue" Offset="0.5" />
+                        <GradientStop Color="DarkTurquoise" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <StackPanel>
+                    <Grid>
+                        <Label Content="How many players will there be?" FontSize="16" Height="28" Padding="5, 0, 0, 3" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <TextBox Height="23" Width="350" Margin="5,26,5,0" Name="PlayersQuantityTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                    </Grid>
+                    <Grid>
+                        <Label Content="Enter the key" FontSize="16" Height="28" Padding="5, 0, 0, 3" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <TextBox Height="23" Width="350" Margin="5,26,5,0" Name="KeyTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                    </Grid>
+                    <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="CreateGameButton" Click="CreateGameButton_OnClick">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
+                                    <TextBlock Text="Create the game" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ClientPanel" Visibility="Collapsed">
+            <Border CornerRadius="18" BorderThickness="2">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="LightCyan" Offset="0.0" />
+                        <GradientStop Color="LightBlue" Offset="0.5" />
+                        <GradientStop Color="DarkTurquoise" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <StackPanel>
+                    <Label Content="Please wait for a request..." FontSize="20" Padding="5, 5, 5, 5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="YesButton" Click="YesButton_OnClick">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
+                                    <TextBlock Text="Yes" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="NoButton" Click="NoButton_OnClick">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
+                                    <TextBlock Text="No" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="GameBoard">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <!-- Line 1 -->
+            <Image Source="Images/Board/BrowserPreview_tmp.jpg" Grid.Row="0" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-02.jpg" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-03.jpg" Grid.Row="0" Grid.Column="2" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-04.jpg" Grid.Row="0" Grid.Column="3" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-05.jpg" Grid.Row="0" Grid.Column="4" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-06.jpg" Grid.Row="0" Grid.Column="5" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-07.jpg" Grid.Row="0" Grid.Column="6" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-08.jpg" Grid.Row="0" Grid.Column="7" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-09.jpg" Grid.Row="0" Grid.Column="8" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-10.jpg" Grid.Row="0" Grid.Column="9" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-11.jpg" Grid.Row="0" Grid.Column="10" Margin="0,0,0,0"/>
+
+            <!-- Column 1 -->
+            <Image Source="Images/Board/BrowserPreview_tmp-12.jpg" Grid.Row="1" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-18.jpg" Grid.Row="2" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-22.jpg" Grid.Row="3" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-24.jpg" Grid.Row="4" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-26.jpg" Grid.Row="5" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-28.jpg" Grid.Row="6" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-30.jpg" Grid.Row="7" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-32.jpg" Grid.Row="8" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-34.jpg" Grid.Row="9" Grid.Column="0" Margin="0,0,0,0"/>
+
+            <!-- Center -->
+            <Image Source="Images/Board/BrowserPreview_tmp-13.jpg" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" Margin="0,0,0,0" Grid.RowSpan="5"/>
+
+            <!-- Requests -->
+            <StackPanel Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="7" Margin="0,0,0,0" Grid.RowSpan="4" x:Name="HostRequestPanel" >
+                <Border CornerRadius="18" BorderThickness="2">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Color="LightCyan" Offset="0.0" />
+                            <GradientStop Color="LightBlue" Offset="0.5" />
+                            <GradientStop Color="DarkTurquoise" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <Label Content="Please wait for a request..." FontSize="20" Padding="5, 5, 5, 5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="HostYesButton" Click="YesButton_OnClick">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
+                                        <TextBlock Text="Yes" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="HostNoButton" Click="NoButton_OnClick">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
+                                        <TextBlock Text="No" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </Border>
             </StackPanel>
-        </Border>
-        <Border CornerRadius="18" BorderThickness="2">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                    <GradientStop Color="LightCyan" Offset="0.0" />
-                    <GradientStop Color="LightBlue" Offset="0.5" />
-                    <GradientStop Color="DarkTurquoise" Offset="1.0" />
-                </LinearGradientBrush>
-            </Border.Background>
-            <StackPanel x:Name="RegistrationHostPanel" Visibility="Collapsed">
-                <Grid>
-                    <Label Content="How many players will there be?" FontSize="16" Height="28" Padding="5, 0, 0, 3" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                    <TextBox Height="23" Width="350" Margin="5,26,5,0" Name="PlayersQuantityTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                </Grid>
-                <Grid>
-                    <Label Content="Enter the key" FontSize="16" Height="28" Padding="5, 0, 0, 3" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                    <TextBox Height="23" Width="350" Margin="5,26,5,0" Name="KeyTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                </Grid>
-                <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="CreateGameButton" Click="CreateGameButton_OnClick">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
-                                <TextBlock Text="Create the game" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </StackPanel>
-        </Border>
-        <Canvas x:Name="HostPanel" Visibility="Collapsed">
-            <Image HorizontalAlignment="Center" Source="/Images/LargeBoard.jpg"></Image>
-        </Canvas>
-        <Border CornerRadius="18" BorderThickness="2">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                    <GradientStop Color="LightCyan" Offset="0.0" />
-                    <GradientStop Color="LightBlue" Offset="0.5" />
-                    <GradientStop Color="DarkTurquoise" Offset="1.0" />
-                </LinearGradientBrush>
-            </Border.Background>
-            <StackPanel x:Name="ClientPanel" Visibility="Collapsed">
-                <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="YesButton" Click="YesButton_OnClick">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
-                                <TextBlock Text="Yes" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="NoButton" Click="NoButton_OnClick">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
-                                <TextBlock Text="No" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </StackPanel>
-        </Border>
+            
+            <!-- Last Column -->
+            <Image Source="Images/Board/BrowserPreview_tmp-14.jpg" Grid.Row="1" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-19.jpg" Grid.Row="2" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-23.jpg" Grid.Row="3" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-25.jpg" Grid.Row="4" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-27.jpg" Grid.Row="5" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-29.jpg" Grid.Row="6" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-31.jpg" Grid.Row="7" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-33.jpg" Grid.Row="8" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-35.jpg" Grid.Row="9" Grid.Column="10" Margin="0,0,0,0"/>
+
+            <!-- Last Line -->
+            <Image Source="Images/Board/BrowserPreview_tmp-36.jpg" Grid.Row="10" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-37.jpg" Grid.Row="10" Grid.Column="1" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-38.jpg" Grid.Row="10" Grid.Column="2" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-39.jpg" Grid.Row="10" Grid.Column="3" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-40.jpg" Grid.Row="10" Grid.Column="4" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-41.jpg" Grid.Row="10" Grid.Column="5" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-42.jpg" Grid.Row="10" Grid.Column="6" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-43.jpg" Grid.Row="10" Grid.Column="7" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-44.jpg" Grid.Row="10" Grid.Column="8" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-45.jpg" Grid.Row="10" Grid.Column="9" Margin="0,0,0,0"/>
+            <Image Source="Images/Board/BrowserPreview_tmp-46.jpg" Grid.Row="10" Grid.Column="10" Margin="0,0,0,0"/>
+        </Grid>
+
     </StackPanel>
 </Window>

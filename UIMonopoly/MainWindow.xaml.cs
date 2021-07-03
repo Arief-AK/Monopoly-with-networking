@@ -31,7 +31,7 @@ namespace UIMonopoly
             RegistrationPanel.Visibility = Visibility.Collapsed;
             if (IsHostRadioB.IsChecked == true)
             {
-                RegistrationHostPanel.Visibility = Visibility.Visible;
+                HostRegistrationPanel.Visibility = Visibility.Visible;
             }
             else
             {
@@ -41,8 +41,8 @@ namespace UIMonopoly
         
         private void CreateGameButton_OnClick(object sender, RoutedEventArgs e)
         {
-            RegistrationHostPanel.Visibility = Visibility.Hidden;
-            HostPanel.Visibility = Visibility.Visible;
+            HostRegistrationPanel.Visibility = Visibility.Collapsed;
+            GameBoard.Visibility = Visibility.Visible;
         }
 
         private void YesButton_OnClick(object sender, RoutedEventArgs e)
