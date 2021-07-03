@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UIMonopoly"
         mc:Ignorable="d"
         Title="Monopoly Game" Height="800" Width="800">
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+    <StackPanel HorizontalAlignment="Center" Margin="0,-56,0,-57" VerticalAlignment="Center">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="RegistrationPanel">
             <Border CornerRadius="18" BorderThickness="2">
                 <Border.Background>
@@ -25,7 +25,7 @@
                         <Label Content="Enter your name" FontSize="16" Height="28" Padding="5, 0, 0, 3" Margin="5,10,5,0" />
                         <TextBox Height="23" Width="350" Margin="5,0,5,0" Name="UserNameTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" />
                     </StackPanel>
-                    <Image HorizontalAlignment="Center" Source="/Images/MonopolyGuy.png" Width="70"></Image>
+                    <Image HorizontalAlignment="Center" Source="/Images/MonopolyGuy.png" Width="70" Margin="0, 20, 0, 0"></Image>
                     <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RegistrationDoneButton" Click="RegistrationAlmostDoneButton_OnClick">
                         <Button.Template>
                             <ControlTemplate>
@@ -100,7 +100,7 @@
                 </StackPanel>
             </Border>
         </StackPanel>
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="GameBoard">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="GameBoard"  Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
@@ -188,7 +188,7 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
-            
+
             <!-- Last Column -->
             <Image Source="Images/Board/BrowserPreview_tmp-14.jpg" Grid.Row="1" Grid.Column="10" Margin="0,0,0,0"/>
             <Image Source="Images/Board/BrowserPreview_tmp-19.jpg" Grid.Row="2" Grid.Column="10" Margin="0,0,0,0"/>
