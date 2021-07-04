@@ -100,7 +100,7 @@
                 </StackPanel>
             </Border>
         </StackPanel>
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="GameBoard"  Visibility="Collapsed">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="GameBoard" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
@@ -153,8 +153,17 @@
             <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-34.jpg" Grid.Row="9" Grid.Column="0" Margin="0,0,0,0"/>
 
             <!-- Center -->
-            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-13.jpg" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" Margin="0,0,0,0" Grid.RowSpan="5"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-13.jpg" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,0,0,0" Grid.RowSpan="2"/>
 
+            <!-- Text Field -->
+            <RichTextBox  Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="4" Margin="0,0,0,0" Grid.RowSpan="4" IsReadOnly="True">
+                <FlowDocument>
+                    <Paragraph>
+                        <Bold>Welcome to the Monopoly!</Bold>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            
             <!-- Requests -->
             <StackPanel Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="7" Margin="0,0,0,0" Grid.RowSpan="4" x:Name="HostRequestPanel" Visibility="Collapsed">
                 <Border CornerRadius="18" BorderThickness="2">
