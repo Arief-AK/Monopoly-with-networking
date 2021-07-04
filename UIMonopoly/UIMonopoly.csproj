@@ -6,4 +6,18 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+		<None Remove="Images\*.*" />
+		<None Remove="Images\Board\*.*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Images\*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Images\Board\*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
 </Project>

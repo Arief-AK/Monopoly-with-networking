@@ -25,7 +25,7 @@
                         <Label Content="Enter your name" FontSize="16" Height="28" Padding="5, 0, 0, 3" Margin="5,10,5,0" />
                         <TextBox Height="23" Width="350" Margin="5,0,5,0" Name="UserNameTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" />
                     </StackPanel>
-                    <Image HorizontalAlignment="Center" Source="/Images/MonopolyGuy.png" Width="70" Margin="0, 20, 0, 0"></Image>
+                    <Image HorizontalAlignment="Center" Source="/UIMonopoly;component/Images/MonopolyGuy.png" Width="70" Margin="0, 20, 0, 0"></Image>
                     <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RegistrationDoneButton" Click="RegistrationAlmostDoneButton_OnClick">
                         <Button.Template>
                             <ControlTemplate>
@@ -129,31 +129,31 @@
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <!-- Line 1 -->
-            <Image Source="Images/Board/BrowserPreview_tmp.jpg" Grid.Row="0" Grid.Column="0" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-02.jpg" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-03.jpg" Grid.Row="0" Grid.Column="2" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-04.jpg" Grid.Row="0" Grid.Column="3" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-05.jpg" Grid.Row="0" Grid.Column="4" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-06.jpg" Grid.Row="0" Grid.Column="5" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-07.jpg" Grid.Row="0" Grid.Column="6" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-08.jpg" Grid.Row="0" Grid.Column="7" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-09.jpg" Grid.Row="0" Grid.Column="8" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-10.jpg" Grid.Row="0" Grid.Column="9" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-11.jpg" Grid.Row="0" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp.jpg" Grid.Row="0" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-02.jpg" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-03.jpg" Grid.Row="0" Grid.Column="2" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-04.jpg" Grid.Row="0" Grid.Column="3" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-05.jpg" Grid.Row="0" Grid.Column="4" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-06.jpg" Grid.Row="0" Grid.Column="5" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-07.jpg" Grid.Row="0" Grid.Column="6" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-08.jpg" Grid.Row="0" Grid.Column="7" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-09.jpg" Grid.Row="0" Grid.Column="8" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-10.jpg" Grid.Row="0" Grid.Column="9" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-11.jpg" Grid.Row="0" Grid.Column="10" Margin="0,0,0,0"/>
 
             <!-- Column 1 -->
-            <Image Source="Images/Board/BrowserPreview_tmp-12.jpg" Grid.Row="1" Grid.Column="0" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-18.jpg" Grid.Row="2" Grid.Column="0" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-22.jpg" Grid.Row="3" Grid.Column="0" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-24.jpg" Grid.Row="4" Grid.Column="0" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-26.jpg" Grid.Row="5" Grid.Column="0" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-28.jpg" Grid.Row="6" Grid.Column="0" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-30.jpg" Grid.Row="7" Grid.Column="0" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-32.jpg" Grid.Row="8" Grid.Column="0" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-34.jpg" Grid.Row="9" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-12.jpg" Grid.Row="1" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-18.jpg" Grid.Row="2" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-22.jpg" Grid.Row="3" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-24.jpg" Grid.Row="4" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-26.jpg" Grid.Row="5" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-28.jpg" Grid.Row="6" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-30.jpg" Grid.Row="7" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-32.jpg" Grid.Row="8" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-34.jpg" Grid.Row="9" Grid.Column="0" Margin="0,0,0,0"/>
 
             <!-- Center -->
-            <Image Source="Images/Board/BrowserPreview_tmp-13.jpg" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" Margin="0,0,0,0" Grid.RowSpan="5"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-13.jpg" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" Margin="0,0,0,0" Grid.RowSpan="5"/>
 
             <!-- Requests -->
             <StackPanel Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="7" Margin="0,0,0,0" Grid.RowSpan="4" x:Name="HostRequestPanel" >
@@ -190,28 +190,28 @@
             </StackPanel>
 
             <!-- Last Column -->
-            <Image Source="Images/Board/BrowserPreview_tmp-14.jpg" Grid.Row="1" Grid.Column="10" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-19.jpg" Grid.Row="2" Grid.Column="10" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-23.jpg" Grid.Row="3" Grid.Column="10" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-25.jpg" Grid.Row="4" Grid.Column="10" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-27.jpg" Grid.Row="5" Grid.Column="10" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-29.jpg" Grid.Row="6" Grid.Column="10" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-31.jpg" Grid.Row="7" Grid.Column="10" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-33.jpg" Grid.Row="8" Grid.Column="10" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-35.jpg" Grid.Row="9" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-14.jpg" Grid.Row="1" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-19.jpg" Grid.Row="2" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-23.jpg" Grid.Row="3" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-25.jpg" Grid.Row="4" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-27.jpg" Grid.Row="5" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-29.jpg" Grid.Row="6" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-31.jpg" Grid.Row="7" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-33.jpg" Grid.Row="8" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-35.jpg" Grid.Row="9" Grid.Column="10" Margin="0,0,0,0"/>
 
             <!-- Last Line -->
-            <Image Source="Images/Board/BrowserPreview_tmp-36.jpg" Grid.Row="10" Grid.Column="0" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-37.jpg" Grid.Row="10" Grid.Column="1" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-38.jpg" Grid.Row="10" Grid.Column="2" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-39.jpg" Grid.Row="10" Grid.Column="3" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-40.jpg" Grid.Row="10" Grid.Column="4" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-41.jpg" Grid.Row="10" Grid.Column="5" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-42.jpg" Grid.Row="10" Grid.Column="6" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-43.jpg" Grid.Row="10" Grid.Column="7" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-44.jpg" Grid.Row="10" Grid.Column="8" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-45.jpg" Grid.Row="10" Grid.Column="9" Margin="0,0,0,0"/>
-            <Image Source="Images/Board/BrowserPreview_tmp-46.jpg" Grid.Row="10" Grid.Column="10" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-36.jpg" Grid.Row="10" Grid.Column="0" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-37.jpg" Grid.Row="10" Grid.Column="1" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-38.jpg" Grid.Row="10" Grid.Column="2" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-39.jpg" Grid.Row="10" Grid.Column="3" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-40.jpg" Grid.Row="10" Grid.Column="4" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-41.jpg" Grid.Row="10" Grid.Column="5" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-42.jpg" Grid.Row="10" Grid.Column="6" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-43.jpg" Grid.Row="10" Grid.Column="7" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-44.jpg" Grid.Row="10" Grid.Column="8" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-45.jpg" Grid.Row="10" Grid.Column="9" Margin="0,0,0,0"/>
+            <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-46.jpg" Grid.Row="10" Grid.Column="10" Margin="0,0,0,0"/>
         </Grid>
 
     </StackPanel>
