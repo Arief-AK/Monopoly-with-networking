@@ -78,7 +78,13 @@
                     </LinearGradientBrush>
                 </Border.Background>
                 <StackPanel>
-                    <Label Content="Please wait for a request..." FontSize="20" Padding="5, 5, 5, 5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <RichTextBox Padding="5, 5, 5, 5" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True" x:Name="TextBoxOnClientFormForData">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Bold>Please wait for a request...</Bold>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
                     <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="YesButton" Click="YesButton_OnClick">
                         <Button.Template>
                             <ControlTemplate>
@@ -156,7 +162,7 @@
             <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-13.jpg" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,0,0,0" Grid.RowSpan="2"/>
 
             <!-- Text Field -->
-            <RichTextBox  Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="4" Margin="0,0,0,0" Grid.RowSpan="4" IsReadOnly="True">
+            <RichTextBox  Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="4" Margin="0,0,0,0" Grid.RowSpan="4" IsReadOnly="True" x:Name="TextBoxOnBoardForData">
                 <FlowDocument>
                     <Paragraph>
                         <Bold>Welcome to the Monopoly!</Bold>

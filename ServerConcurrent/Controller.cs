@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using CommonUI;
 
 namespace ServerConcurrent
 {
@@ -28,6 +29,10 @@ namespace ServerConcurrent
         
         private readonly Random _random = new Random();
         private int PlayerAmount { get; set; }
+        public TextDataPresenter DataPresenter { get; set; }
+        public String PlayerName { get; set; }
+        public int NumberOfPlyers { get; set; }
+        public String ServerKey { get; set; }
 
         public Controller()
         {
@@ -44,10 +49,10 @@ namespace ServerConcurrent
         // Function to input player details
         private void InitialisePlayers()
         {
-            Console.WriteLine("\nHost, please enter your name:");
-            var name = Console.ReadLine();
+            //Console.WriteLine("\nHost, please enter your name:");
+            //var name = Console.ReadLine();
 
-            Player host = new Player(0, name, 100, _hostKey.InGameKey);
+            Player host = new Player(0, PlayerName, 100, _hostKey.InGameKey);
             host.Ready = true;
             host.Taken = true;
             
@@ -332,11 +337,12 @@ namespace ServerConcurrent
         {
             var valid = false;
             
-            Console.WriteLine("\nWelcome to monopoly!");
-            
+            DataPresenter.WriteLine("\nWelcome to monopoly!");
+
             // Prompt host to create 'invitation' key
-            Console.WriteLine("\nYou are a host, please create an invitation key:");
-            _hostKey.InGameKey = Console.ReadLine();
+            //Console.WriteLine("\nYou are a host, please create an invitation key:");
+
+            _hostKey.InGameKey = ServerKey;// Console.ReadLine();
             _hostKey.CurrentPlayer = 0;
             
             // Send host invitation key to database
@@ -346,8 +352,8 @@ namespace ServerConcurrent
             while (!valid)
             {
                 // Prompt user the amount of players in the game
-                Console.WriteLine("\nPlease enter number of players in this game: (2-8)");
-                PlayerAmount = Convert.ToInt32(Console.ReadLine());
+                //Console.WriteLine("\nPlease enter number of players in this game: (2-8)");
+                PlayerAmount = NumberOfPlyers; // Convert.ToInt32(Console.ReadLine());
 
                 if (PlayerAmount is >= 1 and <= 8) // Change me!
                 {
@@ -382,7 +388,7 @@ namespace ServerConcurrent
             // Wait for client responses
             for (var i = 0; i < PlayerAmount; i++)
             {
-                Console.WriteLine($"\nWaiting on client:{i}");
+                DataPresenter.WriteLine($"\nWaiting for client:{i}");
                 // Function to check if client responds
                 if (await GetClientReady(_inGamePlayers[i]))
                 {
@@ -447,14 +453,14 @@ namespace ServerConcurrent
             // Create a case for landing on jail (visiting)
             if (currentProperty.Name == "JAIL")
             {
-                Console.WriteLine("\nYou have landed on 'Just visiting Jail'");
+                DataPresenter.WriteLine("\nYou have landed on 'Just visiting Jail'");
                 found = true;
             }
             
             // Case for landing on go-to-jail
             if (currentProperty.Name == "GO TO JAIL")
             {
-                Console.WriteLine($"\n{thisPlayer.GetName()}, you have landed on {currentProperty.Name}. So, you" +
+                DataPresenter.WriteLine($"\n{thisPlayer.GetName()}, you have landed on {currentProperty.Name}. So, you" +
                                   $"are now in jail.");
                 
                 // Set current player position to JAIL
@@ -467,6 +473,7 @@ namespace ServerConcurrent
             // Property is owned by current player
             if (thisPlayer.PropertyOwned(currentProperty))
             {
+                 //QQQQ
                 // Prompt user to buy a house or hotel
                 Console.WriteLine("\nWould you like to purchase a house (1) or hotel (2), if not (0)");
                 var answer = Console.Read();
@@ -523,7 +530,7 @@ namespace ServerConcurrent
                     _inGamePlayers[CurrentPlayer].AddBalance(rent * (-1));
                     _inGamePlayers[index].AddBalance(rent);
                     
-                    Console.WriteLine($"\n{_inGamePlayers[CurrentPlayer].Name} paid the amount of {rent} to" +
+                    DataPresenter.WriteLine($"\n{_inGamePlayers[CurrentPlayer].Name} paid the amount of {rent} to" +
                                       $" {_inGamePlayers[index].GetName()}");
 
                     // Come out of loop

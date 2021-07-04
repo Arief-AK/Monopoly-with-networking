@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Client.Database;
 using Client.Interfaces;
+using CommonUI;
 
 namespace Client
 {
@@ -21,6 +22,9 @@ namespace Client
         private bool Waiting { get; set; }
 
         private Player _clientPlayer = new Player(-1, "", 0,"");
+
+        public TextDataPresenter DataPresenter { get; set; }
+        public String PlayerName { get; set; }
 
         public ClientController()
         {
@@ -174,9 +178,9 @@ namespace Client
         {
             var serverPlayerNumber = -1;
             
-            Console.WriteLine("\nWelcome to monopoly!");
+            //Console.WriteLine("\nWelcome to monopoly!");
             
-            Console.WriteLine("\nStarting a new game!");
+            //Console.WriteLine("\nStarting a new game!");
             
             // Game is not saved. Get new invitation key from server and assign to client key
             _userClientKey.InGameKey = await GetInvitationKey(false);
@@ -206,9 +210,9 @@ namespace Client
         // Function to prompt and enter user details
         private Player InitialisePlayer(int playerNumber)
         {
-            Console.WriteLine("\nPlease enter a name:");
-            var name = Console.ReadLine();
-            
+            // Console.WriteLine("\nPlease enter a name:");
+            var name = PlayerName; // Console.ReadLine();
+
             return new Player(playerNumber, name, 100,_userClientKey.InGameKey);
         }
         
