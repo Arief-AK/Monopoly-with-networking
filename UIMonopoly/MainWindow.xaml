@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UIMonopoly"
         mc:Ignorable="d"
-        Title="Monopoly Game" Height="800" Width="800">
+        Title="Monopoly Game" Height="600" Width="500">
     <StackPanel HorizontalAlignment="Center" Margin="0,-56,0,-57" VerticalAlignment="Center">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="RegistrationPanel">
             <Border CornerRadius="18" BorderThickness="2">
@@ -156,7 +156,7 @@
             <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-13.jpg" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" Margin="0,0,0,0" Grid.RowSpan="5"/>
 
             <!-- Requests -->
-            <StackPanel Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="7" Margin="0,0,0,0" Grid.RowSpan="4" x:Name="HostRequestPanel" >
+            <StackPanel Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="7" Margin="0,0,0,0" Grid.RowSpan="4" x:Name="HostRequestPanel" Visibility="Collapsed">
                 <Border CornerRadius="18" BorderThickness="2">
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
