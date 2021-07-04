@@ -20,22 +20,32 @@ namespace UIMonopoly
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ServerConcurrent.Controller m_serverController;
+        private Client.ClientController m_client;
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void RegistrationAlmostDoneButton_OnClick(object sender, RoutedEventArgs e)
+        private async void RegistrationAlmostDoneButton_OnClick(object sender, RoutedEventArgs e)
         {
             RegistrationPanel.Visibility = Visibility.Collapsed;
             if (IsHostRadioB.IsChecked == true)
             {
                 HostRegistrationPanel.Visibility = Visibility.Visible;
+                m_serverController = new ServerConcurrent.Controller();
+                //await m_serverController.Run();
             }
             else
             {
                 ClientPanel.Visibility = Visibility.Visible;
+                var quit = false;
+                m_client = new Client.ClientController();
+                /*while (!quit)
+                {
+                    await m_client.Run();
+                }*/
             }
         }
         
