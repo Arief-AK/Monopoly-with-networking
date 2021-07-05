@@ -32,7 +32,7 @@ namespace ServerConcurrent
         private int PlayerAmount { get; set; }
         public TextDataPresenter DataPresenter { get; set; }
         public String PlayerName { get; set; }
-        public int NumberOfPlyers { get; set; }
+        public int NumberOfPlayers { get; set; }
         public String ServerKey { get; set; }
 
         public Controller()
@@ -65,21 +65,6 @@ namespace ServerConcurrent
         
         // Function to wait for client response
         private async Task<bool> GetClientReady(Player thisPlayer)
-        {
-            var clientReady = false;
-
-            while (!clientReady)
-            {
-                var player = await GetPlayerData(thisPlayer.PlayerNumber,_hostKey.InGameKey);
-
-                if (player.Ready)
-                    clientReady = true;
-            }
-            return true;
-        }
-        
-        // Function to wait for client response
-        private async Task<bool> GetClientResponse(Player thisPlayer)
         {
             var clientReady = false;
 
@@ -203,31 +188,6 @@ namespace ServerConcurrent
             throw new Exception("\nError in getting data from database");
         }
         
-        // Function to update the 'currentPlayer' of the game
-        private async Task<bool> UpdateCurrentPlayer()
-        {
-            var tempPlayer = await GetCurrentPlayer();
-            var id = tempPlayer.ID;
-            _hostKey.CurrentPlayer = CurrentPlayer;
-            
-            try
-            {
-                string json = JsonSerializer.Serialize(_hostKey);
-                HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await _client.PutAsync($"latest-key/{id}", content);
-                if (response.StatusCode == (HttpStatusCode) 200)
-                {
-                    Debug.WriteLine("JSON response: All good!");
-                }
-            }
-            catch (Exception putException)
-            {
-                Debug.WriteLine(putException);
-                throw;
-            }
-            return true;
-        }
-        
         // Function to get message from client
         private async Task<Message> GetMessageClient(int currentPlayer)
         {
@@ -347,7 +307,7 @@ namespace ServerConcurrent
             while (!valid)
             {
                 // Prompt user the amount of players in the game
-                PlayerAmount = NumberOfPlyers;
+                PlayerAmount = NumberOfPlayers;
 
                 if (PlayerAmount is >= 1 and <= 8) // Change me!
                 {
@@ -364,7 +324,7 @@ namespace ServerConcurrent
             // Initialise the players in the array
             InitialisePlayers();
 
-            for (int i = 0; i < PlayerAmount; i++)
+            for (var i = 0; i < PlayerAmount; i++)
             {
                 var initial = new Message(i);
                 clients[i] = initial;
@@ -452,7 +412,7 @@ namespace ServerConcurrent
             }
             
             // Case for landing on go-to-jail
-            if (currentProperty.Name == "GO TO JAIL")
+            else if (currentProperty.Name == "GO TO JAIL")
             {
                 DataPresenter.WriteLine($"\n{thisPlayer.GetName()}, you have landed on {currentProperty.Name}. So, you" +
                                   $"are now in jail.");
@@ -467,7 +427,6 @@ namespace ServerConcurrent
             // Property is owned by current player
             if (thisPlayer.PropertyOwned(currentProperty))
             {
-                //QQQQ
                 // Prompt user to buy a house or hotel
                 
                 //Console.WriteLine("\nWould you like to purchase a house (1) or hotel (2), if not (0)");
@@ -609,23 +568,52 @@ namespace ServerConcurrent
         }
 
         // Case: Landing on chance case
-        private void LandOnCard(Player thisPlayer)
+        private async Task LandOnCard(Player thisPlayer)
         {
             var card = _board.GetBoardProperty(thisPlayer).Card;
             var response = $"\nYou have good luck, your balance is now:{thisPlayer.GetBalance()}";
+            var msg = await GetMessageClient(CurrentPlayer);
             
             if (_board.GetBoardProperty(thisPlayer).Card.isChance())
             {
-                DataPresenter.WriteLine("\nYou landed on a chance!");
+                if (CurrentPlayer == 0)
+                {
+                    DataPresenter.WriteLine("\nYou landed on a chance!");   
+                }
+
+                msg.StatusCode = 0;
+                msg.Text = response;
+                
+                if (!await UpdateClientMessage(msg, msg.ID))
+                    throw new Exception("\nError occurred with sending message");
             }
             else if(_board.GetBoardProperty(thisPlayer).Card.isCommunity())
             {
-                DataPresenter.WriteLine("\nYou landed on a community chest!");
+                if (CurrentPlayer == 0)
+                {
+                    DataPresenter.WriteLine("\nYou landed on a community chest!");   
+                }
+                
+                msg.StatusCode = 0;
+                msg.Text = response;
+                
+                if (!await UpdateClientMessage(msg, msg.ID))
+                    throw new Exception("\nError occurred with sending message");
             }
             else if(_board.GetBoardProperty(thisPlayer).Card.isTax())
             {
-                DataPresenter.WriteLine("\nYou landed on a tax!");
                 response = $"\nYou have to pay tax, your balance is now:{thisPlayer.GetBalance()}";
+                
+                if (CurrentPlayer == 0)
+                {
+                    DataPresenter.WriteLine("\nYou landed on a tax!");   
+                }
+                
+                msg.StatusCode = 0;
+                msg.Text = response;
+                
+                if (!await UpdateClientMessage(msg, msg.ID))
+                    throw new Exception("\nError occurred with sending message");
             }
             else
             {
@@ -635,15 +623,37 @@ namespace ServerConcurrent
             // Check if the card has a consequence
             if (card.Consequence_Result() <= 0 && !card.isTax())
             {
-                DataPresenter.WriteLine("\nUnlucky, nothing for now");
+                response = "\nUnlucky, nothing for now";
+
+                if (CurrentPlayer == 0)
+                {
+                    DataPresenter.WriteLine(response);   
+                }
+                
+                msg.StatusCode = 0;
+                msg.Text = response;
+                
+                if (!await UpdateClientMessage(msg, msg.ID))
+                    throw new Exception("\nError occurred with sending message");
+                
             }
             else if(!card.isTax())
             {
                 response = $"\nYou have good luck, your balance is now:{thisPlayer.GetBalance()+card.Consequence_Result()}";
                 thisPlayer.AddBalance(thisPlayer.GetBalance() + card.Consequence_Result());
-                DataPresenter.WriteLine(response);   
+
+                if (CurrentPlayer == 0)
+                {
+                    DataPresenter.WriteLine(response);   
+                }
+                
+                msg.StatusCode = 0;
+                msg.Text = response;
+                
+                if (!await UpdateClientMessage(msg, msg.ID))
+                    throw new Exception("\nError occurred with sending message");
+                
             }
-            
         }
 
         private async Task InJail()
@@ -723,7 +733,7 @@ namespace ServerConcurrent
             {
                 await Intialise();
 
-                for (int i = 0; i < PlayerAmount; i++)
+                for (var i = 0; i < PlayerAmount; i++)
                 {
                     _inGamePlayers[CurrentPlayer].Ready = false;
 
@@ -762,7 +772,7 @@ namespace ServerConcurrent
                     }
                     else if(property.Card != null)
                     {
-                        LandOnCard(_inGamePlayers[CurrentPlayer]);
+                        await LandOnCard(_inGamePlayers[CurrentPlayer]);
                     }
                     else
                     {
@@ -816,11 +826,23 @@ namespace ServerConcurrent
                 
                 if (answer == "Y" || answer == "y")
                 {
+                    for (var clients = 0; clients < PlayerAmount; clients++)
+                    {
+                        var quitMsg = await GetMessageClient(clients);
+                        quitMsg.StatusCode = -2;
+                        quitMsg.Text = "\nThanks for playing!\nQuiting...";
+                        
+                        if (!await UpdateClientMessage(quitMsg, quitMsg.ID))
+                            throw new Exception("\nError occurred with sending quit message");
+                    }
+                    
                     DataPresenter.WriteLine("\nThanks for playing!");
 
                     await DeleteAllMessages();
                     await DeleteAllPlayers();
                     await DeleteAllKeys();
+                    
+                    DataPresenter.WriteLine("\nDone cleaning up");
                     
                     Quit = true;
                 }

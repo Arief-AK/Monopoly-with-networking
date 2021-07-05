@@ -19,11 +19,10 @@ namespace Client
         private readonly ClientKey _userClientKey = new();
         private int CurrentGamePlayer { get; set; }
         private bool GameInitialised { get; set; }
-        
         private bool Waiting { get; set; }
-
+        private bool Quit { get; set; }
+        private string LastMessage { get; set; }
         private Player _clientPlayer = new Player(-1, "", 0,"");
-
         public TextDataPresenter DataPresenter { get; set; }
         public String PlayerName { get; set; }
 
@@ -177,6 +176,8 @@ namespace Client
         // Function that prompts user for game 'state'
         private async Task InitialiseGame()
         {
+            Quit = false;
+            
             var serverPlayerNumber = -1;
             
             // Game is not saved. Get new invitation key from server and assign to client key
@@ -196,7 +197,7 @@ namespace Client
             if (!await UpdatePlayerData(_clientPlayer))
                 throw new Exception("\nSomething went wrong!");
             
-            _clientPlayer = await GetPlayerData(_clientPlayer.PlayerNumber, "abcdef");
+            _clientPlayer = await GetPlayerData(_clientPlayer.PlayerNumber, _userClientKey.InGameKey);
             
             // Function to get 'current player' number of the game from server-side
             CurrentGamePlayer = await GetCurrentPlayerNumber(false);
@@ -239,25 +240,7 @@ namespace Client
 
             return playerReceived;
         }
-        
-        // Function to send player data to server
-        private async Task<bool> SendPlayerData(Player thisPlayer)
-        {
-            try
-            {
-                string json = JsonSerializer.Serialize(thisPlayer);
-                HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await _client.PostAsync("players", content);
-                
-                Debug.WriteLine($"JSON response: All good!");
-            }
-            catch (Exception PostException)
-            {
-                Debug.WriteLine(PostException);
-            }
-            return true;
-        }
-        
+
         // Function to get location data
         private async Task<string> GetLocationName(int propertyNumber)
         {
@@ -351,17 +334,24 @@ namespace Client
         }
         
         // Function that runs client-side of Monopoly
-        public async Task Run()
+        public async Task<bool> Run()
         {
             if (!GameInitialised)
             {
-                await InitialiseGame();   
+                await InitialiseGame();
+                Waiting = true;
             }
 
             var msg = await GetMessageClient(_clientPlayer.PlayerNumber);
 
+            // Check for a different response
+            if (LastMessage != msg.Text)
+            {
+                Waiting = false;
+            }
+            
             // Server requests response
-            if (msg.StatusCode == -1)
+            if (msg.StatusCode == -1 && !Waiting)
             {
                 // Show the request
                 Console.WriteLine(msg.Text);
@@ -377,44 +367,67 @@ namespace Client
             }
             
             // Summarise information from server
-            if (msg.StatusCode == 1)
+            switch (msg.StatusCode)
             {
-                if (await GetClientReady(_clientPlayer))
+                // Receive information from server in regards to cards
+                case 0 when !Waiting:
+                    Console.WriteLine(msg.Text);
+                    LastMessage = msg.Text;
+                    break;
+                
+                // Summarise information from server
+                case 1 when !Waiting:
                 {
-                    // Get player
-                    _clientPlayer = await GetPlayerData(_clientPlayer.PlayerNumber, _userClientKey.InGameKey);
-                    
-                    // Show information
-                    Console.WriteLine("\nHere are your stats");
-                    Console.WriteLine($"Name:{_clientPlayer.Name}");
-                    Console.WriteLine($"Account balance:{_clientPlayer.AccountBalance}");
-                    Console.WriteLine($"Properties owned:{_clientPlayer._propertyList.Count}");
-
-                    if (!_clientPlayer.InJail)
+                    if (await GetClientReady(_clientPlayer))
                     {
-                        if (_clientPlayer.Position == 10)
+                        // Get player
+                        _clientPlayer = await GetPlayerData(_clientPlayer.PlayerNumber, _userClientKey.InGameKey);
+                    
+                        // Show information
+                        Console.WriteLine("\nHere are your stats");
+                        Console.WriteLine($"Name:{_clientPlayer.Name}");
+                        Console.WriteLine($"Account balance:{_clientPlayer.AccountBalance}");
+                        Console.WriteLine($"Properties owned:{_clientPlayer._propertyList.Count}");
+
+                        if (!_clientPlayer.InJail)
                         {
-                            Console.WriteLine($"\nPosition: {await GetLocationName(_clientPlayer.Position)} (just-visiting)");
+                            if (_clientPlayer.Position == 10)
+                            {
+                                Console.WriteLine($"\nPosition: {await GetLocationName(_clientPlayer.Position)} (just-visiting)");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"\nPosition: {await GetLocationName(_clientPlayer.Position)}");
+                            }
                         }
                         else
                         {
-                            Console.WriteLine($"\nPosition: {await GetLocationName(_clientPlayer.Position)}");
+                            Console.WriteLine("\nLocation: JAIL");
                         }
-                    }
-                    else
-                    {
-                        Console.WriteLine("\nLocation: JAIL");
-                    }
 
-                    msg.Text = "";
-                    msg.StatusCode = 0;
-                    if(! await UpdateClientMessage(msg,msg.ID)) 
-                        throw new Exception("\nError occurred when updating the message");
+                        msg.Text = "";
+                        msg.StatusCode = 0;
                     
-                    Console.WriteLine("\nYour turn has ended");
+                        if(! await UpdateClientMessage(msg,msg.ID)) 
+                            throw new Exception("\nError occurred when updating the message");
+                    
+                        Console.WriteLine("\nYour turn has ended");
+
+                        LastMessage = msg.Text;
+                        Waiting = true;
+                    }
+                    break;
                 }
+                
+                // Server has sent quit message
+                case -2:
+                    Console.WriteLine(msg.Text);
+                    Quit = true;
+                    break;
             }
+            
             // TURN LOOP END
+            return Quit;
         }
     }
 }
