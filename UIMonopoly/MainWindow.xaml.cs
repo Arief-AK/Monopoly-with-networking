@@ -64,7 +64,7 @@ namespace UIMonopoly
         {
             HostRegistrationPanel.Visibility = Visibility.Collapsed;
             GameBoard.Visibility = Visibility.Visible;
-            m_serverController.NumberOfPlyers = Int32.Parse(PlayersQuantityTextBox.Text);
+            m_serverController.NumberOfPlayers = Int32.Parse(PlayersQuantityTextBox.Text);
             m_serverController.ServerKey = KeyTextBox.Text;
             await m_serverController.Run();
         }

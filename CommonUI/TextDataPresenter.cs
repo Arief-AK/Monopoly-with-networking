@@ -20,18 +20,26 @@ namespace CommonUI
 
         public String YesOrNo(String question)
         {
-            String result = String.Empty;
-            YesNoQestion window = new YesNoQestion(question, ref result);
+            YesNoQestion window = new YesNoQestion(question);
             window.ShowDialog();
-            return result;
+
+            if ((window.DialogResult is not null) && (window.DialogResult == true))
+                return "Y";
+            else
+                return "N";
         }
 
         public String PropertyRequest(String question)
         {
-            String result = String.Empty;
-            PropertyForm window = new PropertyForm(question, ref result);
+            PropertyForm window = new PropertyForm(question);
             window.ShowDialog();
-            return result;
+
+            if (window.DialogResult is null)
+                return "0";
+            else if (window.DialogResult == false)
+                return "1";
+            else
+                return "2";
         }
     }
 }

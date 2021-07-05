@@ -19,9 +19,7 @@ namespace CommonUI
     /// </summary>
     public partial class PropertyForm : Window
     {
-        private String ButtonResult;
-
-        public PropertyForm(String question, ref String result)
+        public PropertyForm(String question)
         {
             InitializeComponent();
 
@@ -34,19 +32,19 @@ namespace CommonUI
 
         private void HotelButton_OnClick(object sender, RoutedEventArgs e)
         {
-            ButtonResult = "2";
+            DialogResult = true; // 2
             Close();
         }
 
         private void HouseButton_OnClick(object sender, RoutedEventArgs e)
         {
-            ButtonResult = "1";
+            DialogResult = false; // 1
             Close();
         }
 
         private void NoButton_OnClick(object sender, RoutedEventArgs e)
         {
-            ButtonResult = "0";
+            DialogResult = null; // 0
             Close();
         }
     }

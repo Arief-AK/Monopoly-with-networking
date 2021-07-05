@@ -19,8 +19,7 @@ namespace CommonUI
     /// </summary>
     public partial class YesNoQestion : Window
     {
-        private String ButtonResult;
-        public YesNoQestion(String question, ref String result)
+        public YesNoQestion(String question)
         {
             InitializeComponent();
 
@@ -33,13 +32,13 @@ namespace CommonUI
 
         private void NoButton_OnClick(object sender, RoutedEventArgs e)
         {
-            ButtonResult = "N";
+            DialogResult = false;
             Close();
         }
 
         private void YesButton_OnClick(object sender, RoutedEventArgs e)
         {
-            ButtonResult = "Y";
+            DialogResult = true;
             Close();
         }
     }
