@@ -25,5 +25,13 @@ namespace CommonUI
             window.ShowDialog();
             return result;
         }
+
+        public String PropertyRequest(String question)
+        {
+            String result = String.Empty;
+            PropertyForm window = new PropertyForm(question, ref result);
+            window.ShowDialog();
+            return result;
+        }
     }
 }

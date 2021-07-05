@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -178,10 +179,6 @@ namespace Client
         {
             var serverPlayerNumber = -1;
             
-            //Console.WriteLine("\nWelcome to monopoly!");
-            
-            //Console.WriteLine("\nStarting a new game!");
-            
             // Game is not saved. Get new invitation key from server and assign to client key
             _userClientKey.InGameKey = await GetInvitationKey(false);
             
@@ -210,8 +207,7 @@ namespace Client
         // Function to prompt and enter user details
         private Player InitialisePlayer(int playerNumber)
         {
-            // Console.WriteLine("\nPlease enter a name:");
-            var name = PlayerName; // Console.ReadLine();
+            var name = PlayerName;
 
             return new Player(playerNumber, name, 100,_userClientKey.InGameKey);
         }
@@ -253,11 +249,11 @@ namespace Client
                 HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await _client.PostAsync("players", content);
                 
-                Console.WriteLine($"JSON response: All good!");
+                Debug.WriteLine($"JSON response: All good!");
             }
             catch (Exception PostException)
             {
-                Console.WriteLine(PostException);
+                Debug.WriteLine(PostException);
             }
             return true;
         }
@@ -301,12 +297,12 @@ namespace Client
                 var response = await _client.PutAsync($"players/{thisPlayer.ID}", content);
                 if (response.StatusCode == (HttpStatusCode) 200)
                 {
-                    Console.WriteLine($"JSON response: All good!");
+                    Debug.WriteLine($"JSON response: All good!");
                 }
             }
             catch (Exception putException)
             {
-                Console.WriteLine(putException);
+                Debug.WriteLine(putException);
                 throw;
             }
             
@@ -343,12 +339,12 @@ namespace Client
                 var response = await _client.PutAsync($"messages/{id}", content);
                 if (response.StatusCode == (HttpStatusCode) 200)
                 {
-                    Console.WriteLine("JSON response: All good!");
+                    Debug.WriteLine("JSON response: All good!");
                 }
             }
             catch (Exception putException)
             {
-                Console.WriteLine(putException);
+                Debug.WriteLine(putException);
                 throw;
             }
             return true;

@@ -19,9 +19,35 @@ namespace CommonUI
     /// </summary>
     public partial class PropertyForm : Window
     {
-        public PropertyForm()
+        private String ButtonResult;
+
+        public PropertyForm(String question, ref String result)
         {
             InitializeComponent();
+
+            Run myRun = new Run(question);
+            Paragraph paragraph = new Paragraph();
+            paragraph.Inlines.Add(myRun);
+
+            TextBoxForQuestion.Document.Blocks.Add(paragraph);
+        }
+
+        private void HotelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ButtonResult = "2";
+            Close();
+        }
+
+        private void HouseButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ButtonResult = "1";
+            Close();
+        }
+
+        private void NoButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ButtonResult = "0";
+            Close();
         }
     }
 }
