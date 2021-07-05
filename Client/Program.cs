@@ -8,9 +8,10 @@ namespace Client
        {
            var quit = false;
            var client = new ClientController();
+           
            while (!quit)
            {
-               await client.Run();
+               quit = await client.Run();
            }
        }
     }
