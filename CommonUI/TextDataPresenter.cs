@@ -17,5 +17,13 @@ namespace CommonUI
 
             TextBoxForMessages.Document.Blocks.Add(paragraph);
         }
+
+        public String YesOrNo(String question)
+        {
+            String result = String.Empty;
+            YesNoQestion window = new YesNoQestion(question, ref result);
+            window.ShowDialog();
+            return result;
+        }
     }
 }
