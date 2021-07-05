@@ -78,5 +78,15 @@ namespace UIMonopoly
         {
             MessageBox.Show("You pressed 'No'");
         }
+
+        private async void HostQuitGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            await m_serverController.QuitGame(QuitGame);
+        }
+        private void QuitGame(bool Quit)
+        {
+            if (Quit == true)
+                Close();
+        }
     }
 }

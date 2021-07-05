@@ -429,9 +429,7 @@ namespace ServerConcurrent
             {
                 // Prompt user to buy a house or hotel
                 
-                //Console.WriteLine("\nWould you like to purchase a house (1) or hotel (2), if not (0)");
-                
-                var answer = Int32.Parse(DataPresenter.YesOrNo("Would you like to purchase a house (1) or hotel (2), if not (0)")); // Console.Read();
+                var answer = Int32.Parse(DataPresenter.PropertyRequest("Would you like to purchase a House or Hotel or nothing?"));
 
                 switch (answer)
                 {
@@ -744,9 +742,9 @@ namespace ServerConcurrent
 
             while (!Quit)
             {
-                DataPresenter.WriteLine($"\nCurrent player:{CurrentPlayer+1}");
+                DataPresenter.WriteLine($"\nCurrent player:{CurrentPlayer + 1}");
                 DataPresenter.WriteLine($"Name: {_inGamePlayers[CurrentPlayer].GetName()}");
-                
+
                 // Check if current player is in jail
                 if (!_inGamePlayers[CurrentPlayer].GetJailStatus())
                 {
@@ -755,8 +753,8 @@ namespace ServerConcurrent
                     DataPresenter.WriteLine($"\n{_inGamePlayers[CurrentPlayer].GetName()}, You have rolled the amount:{Dices}");
 
                     // Update current player's coordinates
-                    UpdatePosition(Dices,_inGamePlayers[CurrentPlayer]);
-                
+                    UpdatePosition(Dices, _inGamePlayers[CurrentPlayer]);
+
                     // Handle what happens when current player lands
                     var property = _board.GetBoardProperty(_inGamePlayers[CurrentPlayer]);
 
@@ -770,7 +768,7 @@ namespace ServerConcurrent
                     {
                         await LandOnProperty(_inGamePlayers[CurrentPlayer]);
                     }
-                    else if(property.Card != null)
+                    else if (property.Card != null)
                     {
                         await LandOnCard(_inGamePlayers[CurrentPlayer]);
                     }
@@ -779,13 +777,13 @@ namespace ServerConcurrent
                         throw new Exception("Something went wrong");
                     }
                 }
-                
+
                 // Current player is in jail
                 else
                 {
                     await InJail();
                 }
-                
+
                 // Update the board
                 _board.UpdateBoard(_inGamePlayers[CurrentPlayer]);
 
@@ -800,11 +798,11 @@ namespace ServerConcurrent
                 {
                     msg.StatusCode = 0;
                     msg.Text = "";
-                    
+
                     if (!await UpdateClientMessage(msg, msg.ID))
                         throw new Exception("\nError occurred with sending message");
                 }
-                
+
                 // Make the current player ready
                 _inGamePlayers[CurrentPlayer].Ready = true;
 
@@ -812,7 +810,7 @@ namespace ServerConcurrent
                     throw new Exception("\nError occurred in updating player data.");
 
                 // Change to next player using CurrentPlayer
-                if (CurrentPlayer < PlayerAmount-1)
+                if (CurrentPlayer < PlayerAmount - 1)
                 {
                     CurrentPlayer++;
                 }
@@ -820,41 +818,47 @@ namespace ServerConcurrent
                 {
                     CurrentPlayer = 0;
                 }
-                
-                // Prompt current player user to quit
-                var answer = DataPresenter.YesOrNo("Would you like to quit? (Y) or (N)");
-                
-                if (answer == "Y" || answer == "y")
-                {
-                    for (var clients = 0; clients < PlayerAmount; clients++)
-                    {
-                        var quitMsg = await GetMessageClient(clients);
-                        quitMsg.StatusCode = -2;
-                        quitMsg.Text = "\nThanks for playing!\nQuiting...";
-                        
-                        if (!await UpdateClientMessage(quitMsg, quitMsg.ID))
-                            throw new Exception("\nError occurred with sending quit message");
-                    }
-                    
-                    DataPresenter.WriteLine("\nThanks for playing!");
 
-                    await DeleteAllMessages();
-                    await DeleteAllPlayers();
-                    await DeleteAllKeys();
-                    
-                    DataPresenter.WriteLine("\nDone cleaning up");
-                    
-                    Quit = true;
-                }
-                else if(answer == "N" || answer == "n")
-                {
-                    Quit = false;   
-                }
-                else
-                {
-                    throw new Exception("Invalid input");
-                }
+//                await QuitGame();
             }
+        }
+
+        public async Task QuitGame(Action<bool> QuitCallback)
+        {
+            // Prompt current player user to quit
+            var answer = DataPresenter.YesOrNo("Would you like to quit? (Y) or (N)");
+
+            if (answer == "Y" || answer == "y")
+            {
+                for (var clients = 0; clients < PlayerAmount; clients++)
+                {
+                    var quitMsg = await GetMessageClient(clients);
+                    quitMsg.StatusCode = -2;
+                    quitMsg.Text = "\nThanks for playing!\nQuiting...";
+
+                    if (!await UpdateClientMessage(quitMsg, quitMsg.ID))
+                        throw new Exception("\nError occurred with sending quit message");
+                }
+
+                DataPresenter.WriteLine("\nThanks for playing!");
+
+                await DeleteAllMessages();
+                await DeleteAllPlayers();
+                await DeleteAllKeys();
+
+                DataPresenter.WriteLine("\nDone cleaning up");
+
+                Quit = true;
+            }
+            else if (answer == "N" || answer == "n")
+            {
+                Quit = false;
+            }
+            else
+            {
+                throw new Exception("Invalid input");
+            }
+            QuitCallback(Quit);
         }
     }
 }

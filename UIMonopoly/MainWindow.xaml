@@ -159,7 +159,7 @@
             <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-34.jpg" Grid.Row="9" Grid.Column="0" Margin="0,0,0,0"/>
 
             <!-- Text Field -->
-            <RichTextBox  Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Margin="0,0,0,0" Grid.RowSpan="7" IsReadOnly="True" x:Name="TextBoxOnBoardForData" VerticalScrollBarVisibility="Visible" MaxHeight="320">
+            <RichTextBox  Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Margin="0,0,0,0" Grid.RowSpan="7" IsReadOnly="True" x:Name="TextBoxOnBoardForData" VerticalScrollBarVisibility="Visible" MaxHeight="310">
                 <FlowDocument>
                     <Paragraph>
                         <Bold>Welcome to the Monopoly!</Bold>
@@ -170,39 +170,15 @@
             <!-- Center -->
             <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-13.jpg" Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="2" Margin="0,0,0,0" Grid.RowSpan="2"/>
 
-            <!-- Requests -->
-            <StackPanel Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="7" Margin="0,0,0,0" Grid.RowSpan="4" x:Name="HostRequestPanel" Visibility="Collapsed">
-                <Border CornerRadius="18" BorderThickness="2">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                            <GradientStop Color="LightCyan" Offset="0.0" />
-                            <GradientStop Color="LightBlue" Offset="0.5" />
-                            <GradientStop Color="DarkTurquoise" Offset="1.0" />
-                        </LinearGradientBrush>
-                    </Border.Background>
-                    <StackPanel>
-                        <Label Content="Please wait for a request..." FontSize="20" Padding="5, 5, 5, 5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                        <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="HostYesButton" Click="YesButton_OnClick">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
-                                        <TextBlock Text="Yes" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                        <Button Margin="20" Height="50" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="HostNoButton" Click="NoButton_OnClick">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
-                                        <TextBlock Text="No" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                    </StackPanel>
-                </Border>
-            </StackPanel>
+            <Button Grid.Column="6" Grid.Row="8" Margin="20" Height="50" Width="250" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="HostQuitGameButton" Click="HostQuitGameButton_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
+                            <TextBlock Text="Quit" Foreground="Black" HorizontalAlignment="Center" Margin="0, 10 0, 0" FontSize="20"></TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
             <!-- Last Column -->
             <Image Source="/UIMonopoly;component/Images/Board/BrowserPreview_tmp-14.jpg" Grid.Row="1" Grid.Column="10" Margin="0,0,0,0"/>

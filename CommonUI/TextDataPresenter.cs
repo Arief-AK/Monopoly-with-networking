@@ -24,10 +24,15 @@ namespace CommonUI
             YesNoQestion window = new YesNoQestion(question);
             window.ShowDialog();
 
+            String res = String.Empty;
+
             if ((window.DialogResult is not null) && (window.DialogResult == true))
-                return "Y";
+                res = "Y";
             else
-                return "N";
+                res = "N";
+
+            WriteLine("Answer: " + res);
+            return res;
         }
 
         public String PropertyRequest(String question)
@@ -35,12 +40,17 @@ namespace CommonUI
             PropertyForm window = new PropertyForm(question);
             window.ShowDialog();
 
+            String res = String.Empty;
+
             if (window.DialogResult is null)
-                return "0";
+                res = "0";
             else if (window.DialogResult == false)
-                return "1";
+                res = "1";
             else
-                return "2";
+                res = "2";
+
+            WriteLine("Answer: " + res);
+            return res;
         }
     }
 }
