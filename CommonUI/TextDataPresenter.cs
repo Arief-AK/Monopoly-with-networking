@@ -16,6 +16,7 @@ namespace CommonUI
             //paragraph.Inlines.Add(myBold);
 
             TextBoxForMessages.Document.Blocks.Add(paragraph);
+            TextBoxForMessages.ScrollToEnd();
         }
 
         public String YesOrNo(String question)
