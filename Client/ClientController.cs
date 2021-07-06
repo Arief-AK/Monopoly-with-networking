@@ -425,6 +425,7 @@ namespace Client
                 case -2:
                     DataPresenter.WriteLine(msg.Text);
                     Quit = true;
+                    DataPresenter.WriteLine("Thanks for playing! Quiting...");
                     QuitCallback(Quit);
                     break;
             }
