@@ -22,7 +22,7 @@
                     </FlowDocument>
                 </RichTextBox>
                 <WrapPanel>
-                    <Button Margin="20" Height="50" Width="250" DockPanel.Dock="Bottom" x:Name="YesButton" Click="YesButton_OnClick">
+                    <Button Margin="20" Height="50" Width="250" DockPanel.Dock="Bottom" x:Name="YesButton1">
                         <Button.Template>
                             <ControlTemplate>
                                 <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">
@@ -31,7 +31,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button Height="50" Width="250" x:Name="NoButton" DockPanel.Dock="Bottom" Click="NoButton_OnClick">
+                    <Button Height="50" Width="250" x:Name="NoButton1" DockPanel.Dock="Bottom">
                         <Button.Template>
                             <ControlTemplate>
                                 <Border CornerRadius="10" Background="#FCE8C0" BorderBrush="#FCE8C0" BorderThickness="1">

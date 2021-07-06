@@ -5,9 +5,15 @@
     <Compile Update="PropertyForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="RequestControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="PropertyForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="RequestControl.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
