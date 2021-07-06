@@ -85,9 +85,6 @@
                 </Border.Background>
                 <RichTextBox IsReadOnly="True" x:Name="TextBoxOnClientFormForData" VerticalScrollBarVisibility="Visible">
                     <FlowDocument>
-                        <Paragraph>
-                            <Bold>Welcome to the Monopoly!</Bold>
-                        </Paragraph>
                     </FlowDocument>
                 </RichTextBox>
             </Border>
@@ -146,9 +143,6 @@
             <!-- Text Field -->
             <RichTextBox  Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Margin="0,0,0,0" Grid.RowSpan="7" IsReadOnly="True" x:Name="TextBoxOnBoardForData" VerticalScrollBarVisibility="Visible" MaxHeight="310">
                 <FlowDocument>
-                    <Paragraph>
-                        <Bold>Welcome to the Monopoly!</Bold>
-                    </Paragraph>
                 </FlowDocument>
             </RichTextBox>
 

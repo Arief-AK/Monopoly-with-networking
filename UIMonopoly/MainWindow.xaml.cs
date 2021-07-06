@@ -29,7 +29,7 @@ namespace UIMonopoly
             InitializeComponent();
         }
 
-        private void RegistrationAlmostDoneButton_OnClick(object sender, RoutedEventArgs e)
+        private async void RegistrationAlmostDoneButton_OnClick(object sender, RoutedEventArgs e)
         {
             TextDataPresenter dataPresenter = new TextDataPresenter();
 
@@ -53,10 +53,10 @@ namespace UIMonopoly
                 m_client.DataPresenter = dataPresenter;
                 m_client.PlayerName = UserNameTextBox.Text;
 
-                /*while (!quit)
+                while (!quit)
                 {
                     await m_client.Run();
-                }*/
+                }
             }
         }
         
