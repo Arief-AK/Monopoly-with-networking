@@ -203,6 +203,8 @@ namespace Client
             CurrentGamePlayer = await GetCurrentPlayerNumber(false);
             
             GameInitialised = true;
+
+            DataPresenter.WriteLine("Welcome to the Monopoly!");
         }
 
         // Function to prompt and enter user details
@@ -354,9 +356,9 @@ namespace Client
             if (msg.StatusCode == -1 && !Waiting)
             {
                 // Show the request
-                Console.WriteLine(msg.Text);
+                DataPresenter.WriteLine(msg.Text);
 
-                var answer = Console.ReadLine();
+                var answer = DataPresenter.YesOrNo(msg.Text); // Console.ReadLine();
                 
                 // Send response back to server
                 msg.Text = answer;
@@ -371,7 +373,7 @@ namespace Client
             {
                 // Receive information from server in regards to cards
                 case 0 when !Waiting:
-                    Console.WriteLine(msg.Text);
+                    DataPresenter.WriteLine(msg.Text);
                     LastMessage = msg.Text;
                     break;
                 
@@ -382,27 +384,27 @@ namespace Client
                     {
                         // Get player
                         _clientPlayer = await GetPlayerData(_clientPlayer.PlayerNumber, _userClientKey.InGameKey);
-                    
+
                         // Show information
-                        Console.WriteLine("\nHere are your stats");
-                        Console.WriteLine($"Name:{_clientPlayer.Name}");
-                        Console.WriteLine($"Account balance:{_clientPlayer.AccountBalance}");
-                        Console.WriteLine($"Properties owned:{_clientPlayer._propertyList.Count}");
+                        DataPresenter.WriteLine("Here are your stats");
+                        DataPresenter.WriteLine($"Name:{_clientPlayer.Name}");
+                        DataPresenter.WriteLine($"Account balance:{_clientPlayer.AccountBalance}");
+                        DataPresenter.WriteLine($"Properties owned:{_clientPlayer._propertyList.Count}");
 
                         if (!_clientPlayer.InJail)
                         {
                             if (_clientPlayer.Position == 10)
                             {
-                                Console.WriteLine($"\nPosition: {await GetLocationName(_clientPlayer.Position)} (just-visiting)");
+                                DataPresenter.WriteLine($"Position: {await GetLocationName(_clientPlayer.Position)} (just-visiting)");
                             }
                             else
                             {
-                                Console.WriteLine($"\nPosition: {await GetLocationName(_clientPlayer.Position)}");
+                                DataPresenter.WriteLine($"Position: {await GetLocationName(_clientPlayer.Position)}");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("\nLocation: JAIL");
+                                DataPresenter.WriteLine("Location: JAIL");
                         }
 
                         msg.Text = "";
@@ -410,8 +412,8 @@ namespace Client
                     
                         if(! await UpdateClientMessage(msg,msg.ID)) 
                             throw new Exception("\nError occurred when updating the message");
-                    
-                        Console.WriteLine("\nYour turn has ended");
+
+                            DataPresenter.WriteLine("Your turn has ended");
 
                         LastMessage = msg.Text;
                         Waiting = true;
@@ -421,7 +423,7 @@ namespace Client
                 
                 // Server has sent quit message
                 case -2:
-                    Console.WriteLine(msg.Text);
+                    DataPresenter.WriteLine(msg.Text);
                     Quit = true;
                     break;
             }

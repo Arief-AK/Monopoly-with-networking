@@ -295,14 +295,14 @@ namespace ServerConcurrent
         {
             var valid = false;
             
-            DataPresenter.WriteLine("\nWelcome to monopoly!");
+            DataPresenter.WriteLine("Welcome to monopoly!");
 
             _hostKey.InGameKey = ServerKey;
             _hostKey.CurrentPlayer = 0;
             
             // Send host invitation key to database
             if (!await SendHostInvitation(_hostKey))
-                throw new Exception("\nError occured in sending invitation");
+                throw new Exception("Error occured in sending invitation");
 
             while (!valid)
             {
@@ -342,7 +342,7 @@ namespace ServerConcurrent
             // Wait for client responses
             for (var i = 0; i < PlayerAmount; i++)
             {
-                DataPresenter.WriteLine($"\nWaiting for client:{i}");
+                DataPresenter.WriteLine($"Waiting for client:{i}");
                 // Function to check if client responds
                 if (await GetClientReady(_inGamePlayers[i]))
                 {
@@ -407,14 +407,14 @@ namespace ServerConcurrent
             // Create a case for landing on jail (visiting)
             if (currentProperty.Name == "JAIL")
             {
-                DataPresenter.WriteLine("\nYou have landed on 'Just visiting Jail'");
+                DataPresenter.WriteLine("You have landed on 'Just visiting Jail'");
                 found = true;
             }
             
             // Case for landing on go-to-jail
             else if (currentProperty.Name == "GO TO JAIL")
             {
-                DataPresenter.WriteLine($"\n{thisPlayer.GetName()}, you have landed on {currentProperty.Name}. So, you" +
+                DataPresenter.WriteLine($"{thisPlayer.GetName()}, you have landed on {currentProperty.Name}. So, you" +
                                   $"are now in jail.");
                 
                 // Set current player position to JAIL
@@ -483,7 +483,7 @@ namespace ServerConcurrent
                     _inGamePlayers[CurrentPlayer].AddBalance(rent * (-1));
                     _inGamePlayers[index].AddBalance(rent);
                     
-                    DataPresenter.WriteLine($"\n{_inGamePlayers[CurrentPlayer].Name} paid the amount of {rent} to" +
+                    DataPresenter.WriteLine($"{_inGamePlayers[CurrentPlayer].Name} paid the amount of {rent} to" +
                                       $" {_inGamePlayers[index].GetName()}");
 
                     // Come out of loop
@@ -496,8 +496,8 @@ namespace ServerConcurrent
             if (found) return;
             {
                 // Prompt current player to buy the property
-                String GameRequest = "\nWould you like to buy this property?"+
-                                    $"\nName:{currentProperty.Name}"+
+                String GameRequest = "Would you like to buy this property? "+
+                                    $"Name:{currentProperty.Name}"+
                                     $"Description:{currentProperty.Description}"+
                                     $"Rent:${currentProperty.Rent}"+
                                     $"House cost:${currentProperty.HouseCost}"+
@@ -511,7 +511,7 @@ namespace ServerConcurrent
                 
                 if (CurrentPlayer != 0)
                 {
-                    msg.Text = "\nAnswer (Y) or (N):";
+                    msg.Text = "Answer (Yes) or (No):";
                     msg.StatusCode = -1;
 
                     if (!await UpdateClientMessage(msg, msg.ID))
@@ -547,7 +547,7 @@ namespace ServerConcurrent
                         thisPlayer.AddBalance(currentProperty.Rent * (-1));
                         currentProperty.Ownership = thisPlayer;
 
-                        DataPresenter.WriteLine($"\n{_inGamePlayers[CurrentPlayer].Name} has successfully purchased this property");
+                        DataPresenter.WriteLine($"{_inGamePlayers[CurrentPlayer].Name} has successfully purchased this property");
                         DataPresenter.WriteLine($"Your balance is now:${thisPlayer.GetBalance()}");
 
                         msg.Text = $"Your balance is now:${thisPlayer.GetBalance()}";
@@ -559,7 +559,7 @@ namespace ServerConcurrent
                     else
                     {
                         // If not, prompt current player they are not eligible to buy the property
-                        DataPresenter.WriteLine("\nYou are not eligible to purchase this property.");
+                        DataPresenter.WriteLine("You are not eligible to purchase this property.");
                     }
                 }
             }
@@ -576,7 +576,7 @@ namespace ServerConcurrent
             {
                 if (CurrentPlayer == 0)
                 {
-                    DataPresenter.WriteLine("\nYou landed on a chance!");   
+                    DataPresenter.WriteLine("You landed on a chance!");   
                 }
 
                 msg.StatusCode = 0;
@@ -589,7 +589,7 @@ namespace ServerConcurrent
             {
                 if (CurrentPlayer == 0)
                 {
-                    DataPresenter.WriteLine("\nYou landed on a community chest!");   
+                    DataPresenter.WriteLine("You landed on a community chest!");   
                 }
                 
                 msg.StatusCode = 0;
@@ -600,11 +600,11 @@ namespace ServerConcurrent
             }
             else if(_board.GetBoardProperty(thisPlayer).Card.isTax())
             {
-                response = $"\nYou have to pay tax, your balance is now:{thisPlayer.GetBalance()}";
+                response = $"You have to pay tax, your balance is now:{thisPlayer.GetBalance()}";
                 
                 if (CurrentPlayer == 0)
                 {
-                    DataPresenter.WriteLine("\nYou landed on a tax!");   
+                    DataPresenter.WriteLine("You landed on a tax!");   
                 }
                 
                 msg.StatusCode = 0;
@@ -621,7 +621,7 @@ namespace ServerConcurrent
             // Check if the card has a consequence
             if (card.Consequence_Result() <= 0 && !card.isTax())
             {
-                response = "\nUnlucky, nothing for now";
+                response = "Unlucky, nothing for now";
 
                 if (CurrentPlayer == 0)
                 {
@@ -637,7 +637,7 @@ namespace ServerConcurrent
             }
             else if(!card.isTax())
             {
-                response = $"\nYou have good luck, your balance is now:{thisPlayer.GetBalance()+card.Consequence_Result()}";
+                response = $"You have good luck, your balance is now:{thisPlayer.GetBalance()+card.Consequence_Result()}";
                 thisPlayer.AddBalance(thisPlayer.GetBalance() + card.Consequence_Result());
 
                 if (CurrentPlayer == 0)
@@ -659,9 +659,9 @@ namespace ServerConcurrent
             // Check if the current player has already skipped a turn
             if (!_inGamePlayers[CurrentPlayer].TurnSkip)
             {
-                String RequestLine = $"\n{_inGamePlayers[CurrentPlayer].GetName()}, you are currently in jail." +
+                String RequestLine = $"{_inGamePlayers[CurrentPlayer].GetName()}, you are currently in jail." +
                                   $"You have a chance to get out of jail if you roll a double (12) on the dices." +
-                                  $"\nWould you like to try?";
+                                  $"Would you like to try?";
                 DataPresenter.WriteLine(RequestLine);
 
                 var msg = await GetMessageClient(CurrentPlayer);
@@ -673,7 +673,7 @@ namespace ServerConcurrent
                 }
                 else
                 {
-                    msg.Text = "\nAnswer (Y) or (N):";
+                    msg.Text = "Answer (Yes) or (No):";
                     msg.StatusCode = -1;
 
                     if (!await UpdateClientMessage(msg, msg.ID))
@@ -704,12 +704,12 @@ namespace ServerConcurrent
                         _inGamePlayers[CurrentPlayer].SetJailStatus(false);
                         _inGamePlayers[CurrentPlayer].SetPosition(20); // 'index' 20 is 'Free parking'
 
-                        DataPresenter.WriteLine($"\n{_inGamePlayers[CurrentPlayer].GetName()}, you are now in" +
+                        DataPresenter.WriteLine($"{_inGamePlayers[CurrentPlayer].GetName()}, you are now in" +
                                           $"'Free parking'");
                     }
                     else
                     {
-                        DataPresenter.WriteLine("\nYou have not rolled the correct amount. Your turn will be skipped.");
+                        DataPresenter.WriteLine("You have not rolled the correct amount. Your turn will be skipped.");
                         _inGamePlayers[CurrentPlayer].TurnSkip = true;
                     }
                 }   
@@ -720,7 +720,7 @@ namespace ServerConcurrent
                 _inGamePlayers[CurrentPlayer].TurnSkip = false;
                 _inGamePlayers[CurrentPlayer].SetPosition(20); // 'index' 20 is 'Free parking'
 
-                DataPresenter.WriteLine($"\n{_inGamePlayers[CurrentPlayer].GetName()}, you are now in" +
+                DataPresenter.WriteLine($"{_inGamePlayers[CurrentPlayer].GetName()}, you are now in" +
                                   $"'Free parking'");
             }
         }
@@ -742,7 +742,7 @@ namespace ServerConcurrent
 
             while (!Quit)
             {
-                DataPresenter.WriteLine($"\nCurrent player:{CurrentPlayer + 1}");
+                DataPresenter.WriteLine($"Current player:{CurrentPlayer + 1}");
                 DataPresenter.WriteLine($"Name: {_inGamePlayers[CurrentPlayer].GetName()}");
 
                 // Check if current player is in jail
@@ -750,7 +750,7 @@ namespace ServerConcurrent
                 {
                     // Roll the dice (random 7 - 12) as there are 2 dices
                     Dices = RollDices();
-                    DataPresenter.WriteLine($"\n{_inGamePlayers[CurrentPlayer].GetName()}, You have rolled the amount:{Dices}");
+                    DataPresenter.WriteLine($"{_inGamePlayers[CurrentPlayer].GetName()}, You have rolled the amount:{Dices}");
 
                     // Update current player's coordinates
                     UpdatePosition(Dices, _inGamePlayers[CurrentPlayer]);
@@ -760,7 +760,7 @@ namespace ServerConcurrent
 
                     if (property.Position == 30)
                     {
-                        DataPresenter.WriteLine($"\n{_inGamePlayers[CurrentPlayer].GetName()}, you have landed on 'GO TO JAIL'");
+                        DataPresenter.WriteLine($"{_inGamePlayers[CurrentPlayer].GetName()}, you have landed on 'GO TO JAIL'");
                         _inGamePlayers[CurrentPlayer].SetJailStatus(true);
                     }
 
@@ -834,19 +834,19 @@ namespace ServerConcurrent
                 {
                     var quitMsg = await GetMessageClient(clients);
                     quitMsg.StatusCode = -2;
-                    quitMsg.Text = "\nThanks for playing!\nQuiting...";
+                    quitMsg.Text = "Thanks for playing! Quiting...";
 
                     if (!await UpdateClientMessage(quitMsg, quitMsg.ID))
                         throw new Exception("\nError occurred with sending quit message");
                 }
 
-                DataPresenter.WriteLine("\nThanks for playing!");
+                DataPresenter.WriteLine("Thanks for playing!");
 
                 await DeleteAllMessages();
                 await DeleteAllPlayers();
                 await DeleteAllKeys();
 
-                DataPresenter.WriteLine("\nDone cleaning up");
+                DataPresenter.WriteLine("Done cleaning up");
 
                 Quit = true;
             }
