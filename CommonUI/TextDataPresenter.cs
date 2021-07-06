@@ -7,8 +7,23 @@ namespace CommonUI
     public class TextDataPresenter
     {
         public RichTextBox TextBoxForMessages { get; set; }
+
+        private bool IsPrevLineEmpty = false;
         public void WriteLine(string textLine)
         {
+            if (textLine.Trim() == String.Empty)
+            {
+                if (IsPrevLineEmpty)
+                {
+                    return;
+                }
+                IsPrevLineEmpty = true;
+            }
+            else
+            {
+                IsPrevLineEmpty = false;
+            }
+
             Run myRun = new Run(textLine);
             //Bold myBold = new Bold(new Run("edit me!"));
             Paragraph paragraph = new Paragraph();

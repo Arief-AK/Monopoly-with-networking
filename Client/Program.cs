@@ -10,8 +10,13 @@ namespace Client
            var client = new ClientController();
            while (!quit)
            {
-               await client.Run();
+               await client.Run(QuitGame);
            }
        }
+
+        private static void QuitGame(bool Quit)
+        {
+            return;
+        }
     }
 }

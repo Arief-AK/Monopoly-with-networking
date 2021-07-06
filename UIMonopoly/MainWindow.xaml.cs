@@ -55,7 +55,7 @@ namespace UIMonopoly
 
                 while (!quit)
                 {
-                    await m_client.Run();
+                    await m_client.Run(QuitGame);
                 }
             }
         }

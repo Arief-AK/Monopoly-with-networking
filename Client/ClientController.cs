@@ -336,7 +336,7 @@ namespace Client
         }
         
         // Function that runs client-side of Monopoly
-        public async Task<bool> Run()
+        public async Task<bool> Run(Action<bool> QuitCallback)
         {
             if (!GameInitialised)
             {
@@ -425,6 +425,7 @@ namespace Client
                 case -2:
                     DataPresenter.WriteLine(msg.Text);
                     Quit = true;
+                    QuitCallback(Quit);
                     break;
             }
             
